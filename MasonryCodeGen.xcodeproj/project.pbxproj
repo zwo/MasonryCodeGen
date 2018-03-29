@@ -264,6 +264,7 @@
 				DEVELOPMENT_TEAM = VLXA55396L;
 				INFOPLIST_FILE = MasonryCodeGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rfchina.MasonryCodeGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -277,6 +278,7 @@
 				DEVELOPMENT_TEAM = VLXA55396L;
 				INFOPLIST_FILE = MasonryCodeGen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rfchina.MasonryCodeGen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
