@@ -34,6 +34,8 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onButtonGenerate:) name:@"Masonry_Code_Gen" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clear) name:@"Masonry_Code_Clear" object:nil];
 }
 
 
@@ -59,6 +61,10 @@
             [array addObject:@"    make.edges.equalTo(<#self.#>);\n"];
         }else{
             NSArray *comp=[tmp componentsSeparatedByString:@" "];
+            if ([comp count] != 4) {
+                [self errorWithString:tmp];
+                return;
+            }
             NSString *newStr=[comp componentsJoinedByString:@" ,"];
             [array addObject:[NSString stringWithFormat:@"    make.edges.equalTo(<#self.#>).insets(UIEdgeInsetsMake(%@));\n",newStr]];
         }
@@ -171,6 +177,31 @@
     
     NSString *finalString=[array componentsJoinedByString:@""];
     self.textView.string=finalString;
+    
+    NSPasteboard *paste = [NSPasteboard generalPasteboard];
+    [paste clearContents];
+    [paste writeObjects:@[finalString]];
+}
+
+- (void)clear
+{
+    self.txtFldEdgeInset.stringValue=@"";
+    self.txtFldTopTRBL.stringValue=@"";
+    self.txtFldTopTRBLValue.stringValue=@"";
+    self.txtFldRightTRBL.stringValue=@"";
+    self.txtFldRightTRBLValue.stringValue=@"";
+    self.txtFldBottomTRBL.stringValue=@"";
+    self.txtFldBottomTRBLValue.stringValue=@"";
+    self.txtFldLeftTRBL.stringValue=@"";
+    self.txtFldLeftTRBLValue.stringValue=@"";
+    self.txtFldTopAbsoluteValue.stringValue=@"";
+    self.txtFldLeftAbsoluteValue.stringValue=@"";
+    self.txtFldWidthAbsoluteValue.stringValue=@"";
+    self.txtFldHeightAbsoluteValue.stringValue=@"";
+    self.txtFldWidthRelativeValue.stringValue=@"";
+    self.txtFldHeightRelativeValue.stringValue=@"";
+    self.txtFldComment.stringValue=@"";
+    [self.txtFldEdgeInset becomeFirstResponder];
 }
 
 - (void)errorWithString:(NSString *)errWord

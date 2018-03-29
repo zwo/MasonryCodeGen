@@ -23,5 +23,14 @@
     // Insert code here to tear down your application
 }
 
+- (void)onGenerateCode:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Masonry_Code_Gen" object:nil];
+}
+
+- (void)onClear:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Masonry_Code_Clear" object:nil];
+}
 
 @end
