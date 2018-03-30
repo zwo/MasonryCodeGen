@@ -18,6 +18,8 @@
 @property (weak) IBOutlet NSTextField *txtFldBottomTRBLValue;
 @property (weak) IBOutlet NSTextField *txtFldLeftTRBL;
 @property (weak) IBOutlet NSTextField *txtFldLeftTRBLValue;
+@property (weak) IBOutlet NSTextField *txtFldCenterXValue;
+@property (weak) IBOutlet NSTextField *txtFldCenterYValue;
 @property (weak) IBOutlet NSTextField *txtFldTopAbsoluteValue;
 @property (weak) IBOutlet NSTextField *txtFldLeftAbsoluteValue;
 @property (weak) IBOutlet NSTextField *txtFldWidthAbsoluteValue;
@@ -95,7 +97,7 @@
             [self errorWithString:tmp];
             return;
         }
-        if ([trblString isEqualToString:@".mas_right"]) {
+        if ([trblString isEqualToString:@".mas_left"]) {
             trblString=@"";
         }
         if ([self.txtFldLeftTRBLValue.stringValue length]) {
@@ -129,13 +131,31 @@
             [self errorWithString:tmp];
             return;
         }
-        if ([trblString isEqualToString:@".mas_left"]) {
+        if ([trblString isEqualToString:@".mas_right"]) {
             trblString=@"";
         }
         if ([self.txtFldRightTRBLValue.stringValue length]) {
             [array addObject:[NSString stringWithFormat:@"    make.right.equalTo(<#self.#>%@).offset(%@);\n",trblString,self.txtFldRightTRBLValue.stringValue]];
         } else {
             [array addObject:[NSString stringWithFormat:@"    make.right.equalTo(<#self.#>);\n"]];
+        }
+    }
+    
+    if ([self.txtFldCenterXValue.stringValue length]) {
+        NSString *tmp=self.txtFldCenterXValue.stringValue;
+        if ([tmp isEqualToString:@"0"]) {
+            [array addObject:[NSString stringWithFormat:@"    make.centerX.equalTo(<#self.#>);\n"]];
+        } else {
+            [array addObject:[NSString stringWithFormat:@"    make.centerX.equalTo(<#self.#>).offset(%@);\n",tmp]];
+        }
+    }
+    
+    if ([self.txtFldCenterYValue.stringValue length]) {
+        NSString *tmp=self.txtFldCenterYValue.stringValue;
+        if ([tmp isEqualToString:@"0"]) {
+            [array addObject:[NSString stringWithFormat:@"    make.centerY.equalTo(<#self.#>);\n"]];
+        } else {
+            [array addObject:[NSString stringWithFormat:@"    make.centerY.equalTo(<#self.#>).offset(%@);\n",tmp]];
         }
     }
     
@@ -201,6 +221,8 @@
     self.txtFldWidthRelativeValue.stringValue=@"";
     self.txtFldHeightRelativeValue.stringValue=@"";
     self.txtFldComment.stringValue=@"";
+    self.txtFldCenterXValue.stringValue=@"";
+    self.txtFldCenterYValue.stringValue=@"";
     [self.txtFldEdgeInset becomeFirstResponder];
 }
 
